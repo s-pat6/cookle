@@ -1,0 +1,11 @@
+.box {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    height: 40vh
+}
+
+h2 {
+    font-family: sans-serif;
+}

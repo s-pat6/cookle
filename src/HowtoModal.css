@@ -1,0 +1,36 @@
+.modalflex {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50vh;
+    overflow-y: auto;
+    width: 50vw;
+}
+
+.text {
+    font-family: sans-serif;
+    margin-bottom: 2vh;
+    align-self: flex-start;
+}
+
+.close {
+    background: 0px;
+    border: 0px;
+    font-size: 4vh;
+    position: fixed;
+    align-self: flex-end;
+}
+
+h1 {
+    margin-bottom: 20vh;
+}
+
+.understand {
+    background-color: lightblue;
+    width: 20vw;
+    height: 10vh;
+    font-size: 3vh;
+    border: 0px;
+    margin-top: 10vh;
+}

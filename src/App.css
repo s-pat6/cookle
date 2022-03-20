@@ -1,0 +1,51 @@
+.screen {
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex {
+    /* border: 3px solid #000;
+    background-color: #dfdfdf; */
+    margin: 2vh
+}
+
+/* .title {
+} */
+
+.box {
+    flex: 4;
+    overflow-y: auto;
+    text-align: center;
+}
+
+/* .input {
+} */
+
+/* .button {
+} */
+
+.submit {
+    background-color: lime;
+    width: 15vw;
+    height: 6vh;
+    margin-right: 1vw;
+    font-size: 3vh;
+    border: 0px;
+}
+
+.again {
+    background-color: skyblue;
+    width: 15vw;
+    height: 6vh;
+    font-size: 3vh;
+    border: 0px;
+}
+
+.error {
+    color: red;
+    font-size: 3vh;
+    justify-content: center;
+}

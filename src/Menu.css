@@ -1,0 +1,49 @@
+.flexbox {
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex {
+    margin-bottom: 3vh;
+}
+
+.title {
+    font-size: 10vh;
+    margin-bottom: auto;
+}
+
+.easy {
+    background-color: greenyellow;
+    width: 20vw;
+    height: 6vh;
+    font-size: 3vh;
+    border: 0px;
+}
+
+.medium {
+    background-color: yellow;
+    width: 20vw;
+    height: 6vh;
+    font-size: 3vh;
+    border: 0px;
+}
+
+.hard {
+    background-color: orangered;
+    width: 20vw;
+    height: 6vh;
+    font-size: 3vh;
+    border: 0px;
+}
+
+.howto {
+    background-color: lightblue;
+    width: 20vw;
+    height: 6vh;
+    font-size: 3vh;
+    border: 0px;
+    margin-top: 10vh;
+}
