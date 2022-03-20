@@ -36,6 +36,7 @@ function App() {
     setDidWin(false)
     setIsOpen(false)
     setDidLose(false)
+    setMinDist(10000000)
   }
 
   function handleGuess () { // Runs whenever submit is pressed
