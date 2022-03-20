@@ -85,7 +85,7 @@ function App() {
       }
 
       setNumGuess(prev => { // Increase the number of guesses by 1
-        return prev + 0.5
+        return prev + 1
       })
 
       setMinDist(prev => {
