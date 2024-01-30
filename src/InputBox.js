@@ -1,14 +1,56 @@
-import React, { useState, useEffect} from 'react'
-import './InputBox.css'
+import Select from "react-select"
+import React, { useEffect } from "react";
+import { useState } from "react";
 
-export default function InputBox({ guessNameRef, handleGuess, prevVal, rerun }) {
-    const [val, setVal] = useState("")
-    useEffect(() => {
-        setVal(prevVal)
-    }, [rerun])
+
+function InputBox(){
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    const getOptions = async () => {
+      try {
+        const response = await fetch("./data/data.json");
+        const options = await response.json();
+        console.log(options);
+        console.log("Ashwin")
+        setOptions(
+          options.map(({ recipe_name }) => ({
+            label: recipe_name,
+            value: recipe_name
+          }))
+        );
+      } catch (error) {
+        // ignore
+      }
+    };
+    getOptions();
+  }, []);
+
   return (
-    <div>
-        <input placeholder='Enter a city...' onChange={e => {setVal(() => {return e.target.value})}} value={val} ref={guessNameRef} type='text' onKeyPress={e => { if (e.key === "Enter") {setVal(e.key.value); return handleGuess()} }} />
-    </div>
+    <>
+      <Select
+        className="text-xl"
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+        required
+        isClearable={true}
+        id="jurisdiction-code"
+      />
+
+      <div
+        style={{
+          color: "hsl(0, 0%, 40%)",
+          display: "inline-block",
+          fontSize: 12,
+          fontStyle: "italic",
+          marginTop: "1em"
+        }}
+      >
+      </div>
+    </>
   )
 }
+
+export default InputBox;

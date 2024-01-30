@@ -11,7 +11,11 @@ import Menu from './Menu'
 function App() {
   const [guessed, setGuessed] = useState([]) //Array of objects of all cities that were guessed
   const guessNameRef = useRef() //Whatever's in the input field
-  const [curCity, setCurCity] = useState({}) //JSON object of the answer
+  const [curFood, setCurFood] = useState(data[0]) //JSON object of the answer
+  //cooking_method: array of strings
+  //image: string url
+  //ingredients: array of strings
+  //recipe_name: string
   const [error, setError] = useState('') // Sends message saying a city isn't valid
   const [numGuess, setNumGuess] = useState(1) // Sets the current number of guesses
   const [val, setVal] = useState("") //Sets the value of the input box
@@ -20,15 +24,14 @@ function App() {
   const [didWin, setDidWin] = useState(false)
   const [didLose, setDidLose] = useState(false)
   const [mode, setMode] = useState(0)
-  const [minDist, setMinDist] = useState(10000000)
+  const [ingreds, setIngreds] = useState(data[0].ingredients)
 
   // console.log(curCity.name)
 
   function handlePlayAgain() {
     setGuessed([])
-    setCurCity(() => {
-      const data2 = data.filter(item => item.iso === "US")
-      return data2[Math.floor(Math.random()*(100))]
+    setCurFood(() => {
+      return data[Math.floor(Math.random()*(data.length/(100)))]
     })
     setError('')
     setNumGuess(1)
@@ -36,7 +39,6 @@ function App() {
     setDidWin(false)
     setIsOpen(false)
     setDidLose(false)
-    setMinDist(10000000)
   }
 
   function handleGuess () { // Runs whenever submit is pressed
@@ -73,7 +75,7 @@ function App() {
 
       setError(() => { // If not a valid city, send an error message
         if(!dataRef) {
-          return "Not a valid city"
+          return "Not a valid recipe"
         }
         return null
       })
@@ -89,21 +91,11 @@ function App() {
         return prev + 1
       })
 
-      setMinDist(prev => {
-        // console.log("data ref dist is: "+ dataRef.dist)
-        if (dist < prev) {
-          return dist
-        }
-        return prev
-      })
-
-      const dist = haversine(dataRef, curCity) // Calculate distance with the haversine formula
-
-      if (dist === 0) {
+      if (dataRef === curFood) {
         handleWin()
       }
 
-      return [...prevGuessed, {key: uuidv4(), name: dataRef.name, check: lowerName, dataRef: dataRef, dist: dist, numGuess: numGuess}]
+      return [...prevGuessed, {key: uuidv4(), name: dataRef.name, check: lowerName, dataRef: dataRef, numGuess: numGuess}]
     })
   }
 
@@ -121,11 +113,14 @@ function App() {
   }
 
   useEffect(() => {
-    setCurCity(() => {
-      const data2 = data.filter(item => item.iso === "US")
-      return data2[Math.floor(Math.random()*(data2.length/(100)))]
+    setCurFood(() => {
+      console.log("run")
+      return data[Math.floor(Math.random()*(data.length/(100)))]
     })
-  }, [mode])
+    setIngreds(() => {
+      return curFood.ingredients;
+    });
+  }, [])
 
   function handleSetMode(n) {
     setMode(n)
@@ -136,30 +131,13 @@ function App() {
     setMode(0)
   }
 
-  if (mode === 0) {
-    return (
-    <div>
-      <Menu setMode={handleSetMode}/>
-    </div>
-    )
-  }
-
   return (
   <div className='screen'>
-    <h1 className='title flex'>Guess The City</h1>
-    <div className='flex'>Game Mode: {mode === 1 ? 'Easy' : mode === 2 ? 'Medium' : 'Hard'}</div>
-    <div className='box flex'>
-      <Guessed allCities={guessed} cur={curCity} mode={mode} minDist={minDist}/>
-    </div>
-    <div className='input flex'>
-      <InputBox guessNameRef={guessNameRef} handleGuess={handleGuess} prevVal={val} rerun={rerun}/>
-      <div className='error'>{error}⠀</div>
-    </div>
-    <div className='button flex'>
-      <button className='submit' onClick={handleGuess}>Submit</button>
-      <button className='again' onClick={handleGiveUp}>{didWin||didLose ? 'Show Stats' : 'Give Up'}</button>
-    </div>
-    <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} city={guessed} cur={curCity} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu}/>
+    <h1 className='title flex'>Cookle</h1>
+    {console.log(typeof(ingreds))}
+    <Guessed allFoods={guessed} ingredients={curFood.ingredients}/>
+    <InputBox />
+    <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} city={guessed} cur={curFood} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu}/>
   </div>
   )
 }
