@@ -25,6 +25,7 @@ function App() {
   const [didLose, setDidLose] = useState(false)
   const [mode, setMode] = useState(0)
   const [ingreds, setIngreds] = useState(data[0].ingredients)
+  const [selectedOption, setSelectedOption] = useState(null);
 
   // console.log(curCity.name)
 
@@ -131,12 +132,16 @@ function App() {
     setMode(0)
   }
 
+  function handleOnSubtmit () {
+    return <div>haiii</div>
+  }
+
   return (
   <div className='screen'>
     <h1 className='title flex'>Cookle</h1>
     {console.log(typeof(ingreds))}
-    <Guessed allFoods={guessed} ingredients={curFood.ingredients}/>
-    <InputBox />
+    <Guessed allFoods={guessed} ingredients={curFood.ingredients} selectedOption={selectedOption ? selectedOption.value : ""}/>
+    <InputBox selectedOption={selectedOption} setSelectedOption = {setSelectedOption} handleOnSubtmit={handleOnSubtmit}/>
     <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} city={guessed} cur={curFood} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu}/>
   </div>
   )

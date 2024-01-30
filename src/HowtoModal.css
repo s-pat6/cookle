@@ -22,7 +22,7 @@
     align-self: flex-end;
 }
 
-h1 {
+h1 .text {
     margin-bottom: 20vh;
 }
 

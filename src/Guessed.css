@@ -6,6 +6,10 @@
     height: 40vh
 }
 
+h1 {
+    margin: 0
+}
+
 h2 {
     font-family: sans-serif;
 }
