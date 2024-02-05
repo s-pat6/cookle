@@ -13,3 +13,11 @@ h1 {
 h2 {
     font-family: sans-serif;
 }
+
+ul {
+    text-align: left;
+}
+
+.ashwin {
+    display: inline-block;
+}

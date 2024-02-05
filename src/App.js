@@ -133,14 +133,17 @@ function App() {
   }
 
   function handleOnSubtmit () {
-    return <div>haiii</div>
+    setGuessed( (x) => {
+      return [...x, selectedOption.value]
+    })
+    console.log(guessed)
   }
 
   return (
   <div className='screen'>
     <h1 className='title flex'>Cookle</h1>
     {console.log(typeof(ingreds))}
-    <Guessed allFoods={guessed} ingredients={curFood.ingredients} selectedOption={selectedOption ? selectedOption.value : ""}/>
+    <Guessed guessed={guessed} ingredients={curFood.ingredients} selectedOption={selectedOption ? selectedOption.value : ""}/>
     <InputBox selectedOption={selectedOption} setSelectedOption = {setSelectedOption} handleOnSubtmit={handleOnSubtmit}/>
     <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} city={guessed} cur={curFood} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu}/>
   </div>
