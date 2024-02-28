@@ -2,12 +2,20 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
-    height: 40vh
+    overflow-y: hidden;
+    height: 65vh;
+    font-family: "Monaco", "Courier New", Monospace; 
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
+.box::-webkit-scrollbar {
+    display: none;
+  }
+
 h1 {
-    margin: 0
+    margin: 0;
+    display: inline;
 }
 
 h2 {
@@ -20,4 +28,8 @@ ul {
 
 .ashwin {
     display: inline-block;
+}
+
+.steps {
+    text-align: left;
 }

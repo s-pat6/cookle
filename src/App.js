@@ -7,6 +7,7 @@ import haversine from "./haversine"
 import './App.css'
 import Modal from './Modal'
 import Menu from './Menu'
+import logo from "./cooklelogo.png"
 
 function App() {
   const [guessed, setGuessed] = useState([]) //Array of objects of all cities that were guessed
@@ -27,12 +28,16 @@ function App() {
   const [ingreds, setIngreds] = useState(data[0].ingredients)
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const date = new Date()
+
   // console.log(curCity.name)
 
   function handlePlayAgain() {
     setGuessed([])
     setCurFood(() => {
-      return data[Math.floor(Math.random()*(data.length/(100)))]
+      console.log(Math.floor(Math.random()*(data.length)))
+      console.log(data.length)
+      return data[Math.floor(Math.random()*(data.length))]
     })
     setError('')
     setNumGuess(1)
@@ -105,7 +110,7 @@ function App() {
       // console.log("You win!")
       setDidWin(true)
       setIsOpen(true)
-    }, 2000)
+    }, 100)
   }
 
   function handleGiveUp() {
@@ -136,17 +141,28 @@ function App() {
     setGuessed( (x) => {
       return [...x, selectedOption.value]
     })
+
+    if (selectedOption.value===curFood.recipe_name) {
+      console.log("correct")
+      handleWin();
+    }
     console.log(guessed)
   }
 
   return (
-  <div className='screen'>
-    <h1 className='title flex'>Cookle</h1>
-    {console.log(typeof(ingreds))}
-    <Guessed guessed={guessed} ingredients={curFood.ingredients} selectedOption={selectedOption ? selectedOption.value : ""}/>
-    <InputBox selectedOption={selectedOption} setSelectedOption = {setSelectedOption} handleOnSubtmit={handleOnSubtmit}/>
-    <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} city={guessed} cur={curFood} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu}/>
+  <div className="screen">
+    <div className='header'>
+      <h1 className='title'>Cookle</h1>
+      <img src={logo} className='logo' width={150}></img>
+    </div>
+    <div className=''>
+      <div>{date.getUTCDate()}</div>
+      {!didWin ? <InputBox selectedOption={selectedOption} setSelectedOption = {setSelectedOption} handleOnSubtmit={handleOnSubtmit}/> : null}
+      <Guessed guessed={guessed} ingredients={curFood.ingredients} selectedOption={selectedOption ? selectedOption.value : ""} steps={curFood.cooking_method} image = {curFood.image}/>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} guessed={guessed} cur={curFood} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu}/>
+      {didWin ? <button onClick={() => setIsOpen(true)}>See Results</button> : null}
+    </div>
   </div>
   )
 }
-export default App;
+export default App; 

@@ -22,7 +22,7 @@ const OVERLAY_STYLES = {
     zIndex: 1000
 }
 
-export default function Modal({open, onClose, didWin, city, cur, handlePlayAgain, handleSetMode}) {
+export default function Modal({open, onClose, didWin, guessed, cur, handlePlayAgain, handleSetMode}) {
     function handleMouseOver(event) {
         event.target.style.backgroundColor='#aaa'
     }
@@ -38,14 +38,14 @@ export default function Modal({open, onClose, didWin, city, cur, handlePlayAgain
             <div style={OVERLAY_STYLES} />
             <div className='modalflex' style={MODAL_STYLES}>
                 <button className='close' onClick={onClose} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>x</button>
-                <div className='text'>{didWin ? 'Congrats, you won!' : "Better luck next time."}</div>
-                <div className='text'>The correct answer was {cur.name}.</div>
-                {didWin ?<div className='text'>It took you {city[city.length-1].numGuess} guesses to find the correct answer.</div> : <div className='text'>You didn't find the right answer.</div> }
+                <div className='modaltext'>{didWin ? 'Congrats, you won!' : "Better luck next time."}</div>
+                <div className='modaltext'>The correct answer was {cur.recipe_name}.</div>
+                {didWin ?<div className='modaltext'>It took you {guessed.length} guesses to find the correct answer.</div> : <div className='text'>You didn't find the right answer.</div> }
+                <img className='modalimg' src={cur.image}/>
+                <br />
                 <div>
-                    <button className='again' onClick={handlePlayAgain}>Play Again</button>
+                    <button className='again' onClick={handlePlayAgain}>New Random Recipe</button>
                 </div>
-                <div className='text'>or...</div>
-                <div><button className='menu' onClick={handleSetMode}>Try Another Mode</button></div>
             </div>
         </>,
         document.getElementById('portal')

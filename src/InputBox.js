@@ -35,7 +35,7 @@ function InputBox( {selectedOption, setSelectedOption, handleOnSubtmit} ) {
         isClearable={true}
         id="jurisdiction-code"
       />
-      <button onClick={handleOnSubtmit}>Ashwin</button>
+      <button onClick={handleOnSubtmit} className="ashwinButton">Ashwin</button>
 
     </>
   )
