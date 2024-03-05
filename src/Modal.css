@@ -10,6 +10,8 @@
 .modaltext {
     font-family: sans-serif;
     margin-bottom: 2vh;
+    font-size: 2vh;
+    color: cadetblue;
     align-self: center;
 }
 
@@ -25,7 +27,7 @@
     background-color: skyblue;
     width: 20vw;
     height: 6vh;
-    font-size: 3vh;
+    font-size: 2vh;
     border: 0px;
 }
 

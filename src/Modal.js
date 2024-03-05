@@ -22,7 +22,7 @@ const OVERLAY_STYLES = {
     zIndex: 1000
 }
 
-export default function Modal({open, onClose, didWin, guessed, cur, handlePlayAgain, handleSetMode}) {
+export default function Modal({open, onClose, didWin, guessed, cur, handlePlayAgain, handleSetMode, time}) {
     function handleMouseOver(event) {
         event.target.style.backgroundColor='#aaa'
     }
@@ -46,6 +46,7 @@ export default function Modal({open, onClose, didWin, guessed, cur, handlePlayAg
                 <div>
                     <button className='again' onClick={handlePlayAgain}>New Random Recipe</button>
                 </div>
+                <h2>Next daily game in: {time}</h2>
             </div>
         </>,
         document.getElementById('portal')

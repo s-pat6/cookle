@@ -12,11 +12,12 @@ import logo from "./cooklelogo.png"
 function App() {
   const [guessed, setGuessed] = useState([]) //Array of objects of all cities that were guessed
   const guessNameRef = useRef() //Whatever's in the input field
-  const [curFood, setCurFood] = useState(data[0]) //JSON object of the answer
+  const [curFood, setCurFood] = useState(data[Math.floor((Date.now()+21600)/86400000) % data.length]) //JSON object of the answer
   //cooking_method: array of strings
   //image: string url
   //ingredients: array of strings
   //recipe_name: string
+  const date = new Date()
   const [error, setError] = useState('') // Sends message saying a city isn't valid
   const [numGuess, setNumGuess] = useState(1) // Sets the current number of guesses
   const [val, setVal] = useState("") //Sets the value of the input box
@@ -25,10 +26,11 @@ function App() {
   const [didWin, setDidWin] = useState(false)
   const [didLose, setDidLose] = useState(false)
   const [mode, setMode] = useState(0)
-  const [ingreds, setIngreds] = useState(data[0].ingredients)
+  const [ingreds, setIngreds] = useState(curFood.ingredients)
   const [selectedOption, setSelectedOption] = useState(null);
+  const [time, setTime] = useState(((24-date.getUTCHours()-1))+":"+ (60-date.getUTCMinutes()-1) +":"+ (60-date.getUTCSeconds()-1))
 
-  const date = new Date()
+  
 
   // console.log(curCity.name)
 
@@ -119,13 +121,11 @@ function App() {
   }
 
   useEffect(() => {
-    setCurFood(() => {
-      console.log("run")
-      return data[Math.floor(Math.random()*(data.length/(100)))]
-    })
-    setIngreds(() => {
-      return curFood.ingredients;
-    });
+    const intervalId = setInterval(() => {
+      setTime(((24-date.getUTCHours()-1))+":"+ (60-date.getUTCMinutes()-1) +":"+ (60-date.getUTCSeconds()-1))
+    }, 1000)
+
+    return () => clearInterval(intervalId)
   }, [])
 
   function handleSetMode(n) {
@@ -156,11 +156,11 @@ function App() {
       <img src={logo} className='logo' width={150}></img>
     </div>
     <div className=''>
-      <div>{date.getUTCDate()}</div>
+      <div>{time}</div>
       {!didWin ? <InputBox selectedOption={selectedOption} setSelectedOption = {setSelectedOption} handleOnSubtmit={handleOnSubtmit}/> : null}
       <Guessed guessed={guessed} ingredients={curFood.ingredients} selectedOption={selectedOption ? selectedOption.value : ""} steps={curFood.cooking_method} image = {curFood.image}/>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} guessed={guessed} cur={curFood} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu}/>
-      {didWin ? <button onClick={() => setIsOpen(true)}>See Results</button> : null}
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} didWin={didWin} guessed={guessed} cur={curFood} handlePlayAgain={handlePlayAgain} handleSetMode={handleSetMenu} time={time}/>
+      {didWin ? <button onClick={() => setIsOpen(true)} className='resultsButton'>See Results</button> : null}
     </div>
   </div>
   )

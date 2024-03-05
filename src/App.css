@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     font-family: "Copperplate", "Papyrus", Fantasy;
-    background-color: rgb(119, 171, 190);
+    background-color: rgb(131, 219, 80);
 }
 
 .root {
@@ -16,7 +16,6 @@
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     border-bottom: solid;
     border-bottom-color: black;
     border-bottom-width: 1px;
@@ -86,3 +85,8 @@
     text-shadow: 0 0 5px #37e32e;
 }
 
+.resultsButton {
+    color: #f602b9;
+    box-shadow: 0 0 5px #1bdc1e;
+    text-shadow: 0 0 5px #37e32e;
+}
