@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/cookle/static/css/main.3bb68cf5.css",
+    "main.js": "/cookle/static/js/main.f5bc30eb.js",
+    "static/media/cooklelogo.png": "/cookle/static/media/cooklelogo.f4ce62643a6813173aa0.png",
+    "index.html": "/cookle/index.html",
+    "main.3bb68cf5.css.map": "/cookle/static/css/main.3bb68cf5.css.map",
+    "main.f5bc30eb.js.map": "/cookle/static/js/main.f5bc30eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3bb68cf5.css",
+    "static/js/main.f5bc30eb.js"
+  ]
+}
